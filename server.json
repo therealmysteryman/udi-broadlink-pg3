@@ -1,0 +1,21 @@
+{
+    "name": "MultiPass!PolyV2",
+    "docs": "",
+    "type": "python3",
+    "executable": "MultiPass-PolyV2.py",
+    "install": "install.sh",
+    "shortPoll": "120",
+    "longPoll": "240",
+    "description": "Allow ISY to send Commands to different objects in the house. i.e. Broadlink RM Pro+",
+    "notice": "Early Beta - Do not use.",
+    "credits": [
+        {
+            "title": "MultiPass!PolyV2: a NodeServer for UDI's ISY994i",
+            "author": "Chad Hoevenaars (ch491)",
+            "version": "0.0.2",
+            "date": "July 15, 2020",
+            "source": "https://github.com/ch491/MultiPass-PolyV2",
+            "license": "https://github.com/ch491/MultiPass-PolyV2/blob/master/LICENSE"
+        }
+    ]
+}

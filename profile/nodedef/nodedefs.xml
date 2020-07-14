@@ -1,0 +1,38 @@
+<nodeDefs>
+    <!-- MultiPass!PolyV2 Controller -->
+    <!-- controller, this must mach the id in your Controller class-->
+    <nodeDef id="controller" nls="ctl">
+        <editors />
+        <sts>
+			<st id="ST" editor="bool" />
+			<st id="GV0" editor="lifxclr" />
+            <st id="GV1" editor="I_DEBUG" />
+		</sts>
+        <cmds>
+            <sends>
+              <!-- These are for our heartbeat -->
+              <cmd id="DON" />
+              <cmd id="DOF" />
+            </sends>
+            <accepts>
+              <cmd id="SET_DM">
+                <p id="" editor="I_DEBUG" init="GV1" />
+              </cmd>
+              <cmd id="DISCOVER" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+	<!-- BroadlinkRM Node (Device) -->
+    <nodeDef id="omniamotor" nls="omnia">
+        <editors />
+        <sts />
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="UP" />
+                <cmd id="DOWN" />
+                <cmd id="STOP" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+</nodeDefs>

@@ -1,0 +1,23 @@
+# MultiPass!PolyV2 Controller
+ND-controller-NAME = MultiPass!PolyV2 Controller
+ND-controller-ICON = GenericCtl
+CMD-ctl-SET_DM-NAME = Set Logger Level
+CMD-ctl-DISCOVER-NAME = Re-Discover Broadlink Units
+ST-ctl-ST-NAME = NodeServer Online
+ST-ctl-GV0-NAME = Nodes discovered
+ST-ctl-GV1-NAME = Logger Level
+
+# Debug/Logger Modes
+CDM-9 = Debug + Modules
+CDM-10 = Debug
+CDM-20 = Info
+CDM-30 = Warning
+CDM-40 = Error
+CDM-50 = Critical
+
+# Omnia Motors
+ND-omniamotor-NAME = OmniaMotor Node
+ND-omniamotor-ICON = Input
+CMD-omniamotor-UP-NAME = Blind Up
+CMD-omniamotor-DOWN-NAME = Blind Down
+CMD-omniamotor-STOP-NAME = Stop Blind
