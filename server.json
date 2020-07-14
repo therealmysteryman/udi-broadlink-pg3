@@ -1,8 +1,8 @@
 {
-    "name": "MultiPass!PolyV2",
+    "name": "MultiPass",
     "docs": "",
     "type": "python3",
-    "executable": "MultiPass-PolyV2.py",
+    "executable": "MultiPass.py",
     "install": "install.sh",
     "shortPoll": "120",
     "longPoll": "240",
@@ -10,7 +10,7 @@
     "notice": "Early Beta - Do not use.",
     "credits": [
         {
-            "title": "MultiPass!PolyV2: a NodeServer for UDI's ISY994i",
+            "title": "MultiPass: a NodeServer for UDI's ISY994i",
             "author": "Chad Hoevenaars (ch491)",
             "version": "0.0.2",
             "date": "July 15, 2020",

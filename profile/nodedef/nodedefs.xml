@@ -1,11 +1,11 @@
 <nodeDefs>
-    <!-- MultiPass!PolyV2 Controller -->
+    <!-- MultiPass! PolyglotV2 Controller -->
     <!-- controller, this must mach the id in your Controller class-->
     <nodeDef id="controller" nls="ctl">
         <editors />
         <sts>
 			<st id="ST" editor="bool" />
-			<st id="GV0" editor="lifxclr" />
+			<st id="GV0" editor="bool" />
             <st id="GV1" editor="I_DEBUG" />
 		</sts>
         <cmds>
@@ -18,7 +18,7 @@
               <cmd id="SET_DM">
                 <p id="" editor="I_DEBUG" init="GV1" />
               </cmd>
-              <cmd id="DISCOVER" />
+              <cmd id="CONNECT" />
             </accepts>
         </cmds>
     </nodeDef>

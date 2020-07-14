@@ -1,8 +1,8 @@
-# MultiPass!PolyV2 Controller
-ND-controller-NAME = MultiPass!PolyV2 Controller
+# controller
+ND-controller-NAME = MultiPass Controller
 ND-controller-ICON = GenericCtl
 CMD-ctl-SET_DM-NAME = Set Logger Level
-CMD-ctl-DISCOVER-NAME = Re-Discover Broadlink Units
+CMD-ctl-CONNECT-NAME = Connect to Broadlink
 ST-ctl-ST-NAME = NodeServer Online
 ST-ctl-GV0-NAME = Nodes discovered
 ST-ctl-GV1-NAME = Logger Level
