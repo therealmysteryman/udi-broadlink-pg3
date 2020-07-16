@@ -18,6 +18,8 @@ import broadlink
 
 import sys
 import json
+# Import the Dictionary that contains all nodes and RFCodes for each. (RFCodes.py)
+from RFCodes import RFCodes
 #import logging
 #import urllib3
 
@@ -29,6 +31,7 @@ You can use LOGGER.info, LOGGER.warning, LOGGER.debug, LOGGER.error levels as ne
 LOGGER = polyinterface.LOGGER
 # IF you want a different log format than the current default
 #polyinterface.LOG_HANDLER.set_log_format('%(asctime)s %(threadName)-10s %(name)-18s %(levelname)-8s %(module)s:%(funcName)s: %(message)s')
+
 
 """
 Open the server.json file and collect the data within it. 
@@ -42,15 +45,6 @@ try:
 except (KeyError, ValueError):
     LOGGER.info('Broadlink Poly Version not found in server.json.')
     VERSION = '0.0.0'
-
-"""Define Nodes and RF Codes - Later to be added to the server.json file."""
-RFCodes = {
-    "Office": [
-         b'\xb2\x00\xcc\x01\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x18\x0c\r\x18\x18\x0c\x0c\x18\r\x18\x0c\x18\x18\r\x0c\x18\x0c\x19\x0c\x18\x18\x00\x01+\xa44\r\x18\x0c\x18\x0c\x19\x0c\x18\x0c\x19\x0b\x19\x0c\x18\x18\x0c\x18\r\x0c\x18\r\x18\x18\x0c\x0c\x19\x0c\x18\x18\r\x17\r\x0c\x19\x0c\x18\x0c\x18\x0c\x18\x19\x0c\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x0c\x18\x19\x0c\x0c\x18\x18\r\x0c\x18\r\x17\r\x18\x18\x0c\r\x18\x0c\x18\x0c\x19\x18\x00\x01+\xa44\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\x18\r\x18\x0c\r\x18\x0c\x18\x19\x0c\x0c\x18\x0c\x19\x18\x0c\x18\x0c\r\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\r\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x18\x0c\r\x17\x19\x0c\r\x17\r\x18\r\x17\x18\r\x0c\x18\r\x18\x0c\x18\x18\x00\x02\x13\xa45\x0c\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\r\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x18\r\x0c\x18\r\x17\x19\x0c\x18\x0c\r\x18\x0c\x18\r\x18\x0c\x18\x18\r\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x18\x0c\r\x18\x18\x0c\r\x17\r\x18\x0c\x18\x18\r\x0c\x19\x0c\x18\x0c\x18\x18\x00\x01+\xa44\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x18\r\x18\x0c\x0c\x19\x0c\x18\x18\x0c\x0c\x18\r\x18\x18\x0c\x19\x0c\x0c\x18\r\x18\x0c\x18\x0c\x19\x18\x0c\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\x19\x0c\x0c\x18\x18\r\x0c\x18\x0c\x18\r\x18\x18\x0c\r\x18\x0c\x18\x0c\x19\x17\x00\x01+\xa45\x0c\x18\x0c\x19\x0c\x18\x0c\x18\r\x17\r\x18\x0c\x19\x18\x0c\x18\x0c\x0c\x19\x0c\x18\x18\r\x0c\x18\x0c\x19\x17\r\x18\x0c\r\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x0c\x18\x0c\x18\x19\x0c\x0c\x18\x19\x0c\x0c\x18\r\x18\x0c\x18\x18\r\x0c\x18\x0c\x19\x0b\x19\x18\x00\x05\xdc\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', b'\xb2\x01\x84\x03\x18\x0c\x0c\x18\x0c\x18\x19\x0b\x19\x0c\x0c\x18\x0c\x18\r\x17\r\x17\x19\x0c\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x17\r\x18\x0c\x18\x18\x0c\x18\r\x0c\x18\x0c\x18\x18\x0c\x18\x0c\r\x17\r\x17\x19\x0c\x18\x00\x01*\xa44\x0c\x18\r\x17\r\x17\r\x17\r\x18\r\x17\r\x17\x18\x0c\x19\x0c\x0c\x18\r\x18\x17\r\x0c\x18\x0c\x18\x18\x0c\x18\r\x0c\x18\x0c\x18\x0c\x18\x0c\x18\x19\x0b\r\x18\x0c\x18\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x18\x18\x0c\x18\x0c\r\x17\r\x18\x18\x0b\x19\x0c\x0c\x18\x0c\x18\x19\x0b\x19\x00\x02\x08\xa43\r\x17\r\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x18\x0c\r\x17\r\x18\x18\x0c\x18\x0c\x0c\x18\r\x17\r\x18\x0c\x18\x18\x0c\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\x0c\x18\x18\x0c\x18\r\x0c\x18\x0c\x18\x18\x0c\x19\x0c\x0c\x17\r\x18\x18\x0c\x18\x00\x01+\xa34\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\x19\x0c\x18\x0c\r\x17\r\x18\x18\x0c\x0c\x18\r\x17\x19\x0b\x19\x0c\x0c\x18\x0c\x18\r\x17\r\x18\x18\x0c\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\r\x17\r\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x17\r\x17\x19\x0c\x18\x00\x01*\xa44\x0c\x18\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\x18\x0c\x19\x0c\x0c\x18\x0c\x18\x18\r\x0c\x18\x0c\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x0c\x18\x0c\x18\x18\x0c\r\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x17\r\x17\x19\x0c\x18\x0c\x0c\x18\r\x17\x19\x0b\x19\x00\x02\x08\xa44\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\x18\r\x18\x0c\x0c\x18\x0c\x18\x18\x0c\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x17\r\x18\r\x17\r\x17\x18\x0c\r\x17\r\x18\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\x0c\x18\r\x18\x18\x0c\x18\x0c\x0c\x18\r\x17\x18\x0c\x19\x0c\x0c\x18\r\x17\x19\x0b\x19\x00\x01*\xa44\x0c\x18\x0c\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x18\x0c\r\x17\r\x18\x18\x0c\x18\x0c\r\x17\r\x18\x0c\x18\x0c\x18\x18\x0c\r\x17\r\x17\r\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\r\x17\x18\x0c\x18\r\x0c\x18\x0c\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\x18\x0c\x19\x00\x01*\xa34\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\x19\x0c\x18\x0c\r\x17\r\x17\x19\x0c\x0c\x18\x0c\x18\x18\r\x17\r\x0c\x18\x0c\x18\x0c\x18\r\x18\x18\x0c\x0c\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\r\x17\r\x17\r\x18\x18\x0c\x18\x0c\r\x17\r\x18\x18\x0c\x18\x0c\x0c\x18\r\x17\x19\x0c\x18\x00\x02\x08\xa44\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\x0c\x18\x19\x0c\x18\x0c\x0c\x18\r\x17\x18\x0c\r\x18\x0c\x18\x18\x0c\x18\x0c\r\x17\r\x18\x0c\x18\r\x17\x18\r\x0c\x18\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\r\x18\x18\x0c\x18\x0c\x0c\x18\r\x17\x19\x0c\x18\x0c\x0c\x18\r\x17\x19\x0b\x19\x00\x01*\xa43\r\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x0c\x18\x18\x0c\x19\x0c\x0c\x18\x0c\x18\x18\x0c\r\x17\r\x17\x19\x0c\x18\x0c\r\x17\r\x18\x0c\x18\x0c\x18\x18\x0c\r\x17\r\x18\x0c\x18\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\x18\r\x18\x0c\x0c\x18\r\x17\x19\x0c\x18\x0c\x0c\x18\x0c\x18\x18\x0c\x19\x00\x01*\xa44\x0c\x18\x0c\x18\x0c\x18\r\x17\r\x17\r\x18\x0c\x18\x18\x0c\x19\x0b\r\x18\x0c\x18\x18\x0c\r\x17\x0c\x18\x19\x0c\x18\x0c\x0c\x18\r\x18\x0c\x18\x0c\x18\x18\x0c\r\x17\r\x18\x0c\x18\x0c\x18\r\x17\r\x17\r\x17\r\x18\x0c\x18\x18\x0c\x18\r\x0c\x18\x0c\x18\x19\x0b\x19\x0c\x0c\x18\x0c\x18\x18\x0c\x18\x00\x05\xdc\x00\x00\x00\x00',
-         b'\xb2\x00\xf6\x01\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\x19\x0c\r\x17\r\x17\x19\x0c\r\x18\x0c\x18\x18\x0c\x18\r\x0c\x18\r\x18\x0c\x18\r\x17\x19\x0c\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\r\x17\r\x18\x0c\x19\x18\x0c\x0c\x18\x18\r\x0c\x18\r\x17\x19\x0c\x18\x0c\x18\r\x18\x0c\r\x18\x0c\x00\x016\xa54\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x18\x0c\x18\r\x0c\x18\x0c\x18\x18\r\x0c\x18\r\x18\x18\x0c\x18\r\x0c\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\r\x18\r\x17\r\x18\x0c\x18\r\x17\r\x18\r\x18\x0c\x18\x18\r\x0c\x18\x18\x0c\r\x18\x0c\x18\x18\x0c\x19\x0c\x18\x0c\x19\x0c\r\x17\r\x00\x016\xa44\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x19\x0c\x18\x0c\r\x18\x0c\x18\x18\x0c\r\x18\x0c\x18\x18\x0c\x19\x0c\r\x17\r\x18\x0c\x18\r\x18\x18\x0c\r\x17\r\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x18\x0c\x0c\x18\x19\x0c\x0c\x18\r\x18\x18\x0c\x19\x0c\x18\x0c\x18\x0c\r\x18\x0c\x00\x016\xa54\x0c\x18\x0c\x19\x0c\x18\r\x17\r\x18\x0c\x18\r\x17\x19\x0c\x18\r\x0c\x18\r\x17\x19\x0c\x0c\x18\x0c\x19\x18\x0c\x19\x0c\x0c\x18\r\x17\r\x18\x0c\x18\x18\r\x0c\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x19\x0c\x18\x18\x0c\r\x18\x18\x0c\r\x18\x0c\x18\x18\x0c\x19\x0c\x18\x0c\x19\x0c\r\x17\r\x00\x016\xa53\r\x18\x0c\x18\x0c\x19\x0c\x18\x0c\x18\r\x18\x0c\x18\x18\r\x18\x0c\r\x18\x0c\x18\x18\x0c\r\x18\x0c\x18\x19\x0b\x19\x0c\r\x17\r\x18\r\x17\r\x17\x19\x0c\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\x19\x0c\x0c\x18\x19\x0c\x0c\x18\x0c\x18\x18\r\x18\x0c\x19\x0c\x18\x0c\r\x18\x0c\x00\x016\xa53\r\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\r\x17\x18\r\x18\x0c\r\x18\r\x17\x19\x0c\x0c\x18\r\x18\x18\x0c\x18\x0c\r\x18\x0c\x18\r\x17\r\x18\x19\x0c\x0c\x18\r\x17\r\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x18\x0c\r\x18\x18\x0c\r\x18\x0c\x18\x18\x0c\x19\x0c\x18\x0c\x19\x0c\r\x17\r\x00\x05\xdc\x00\x00',
-         b'\xb2\x00\xa4\x00\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\x0c\x19\x18\x0c\x18\r\x0c\x18\x0c\x18\x19\x0c\x0c\x18\x0c\x18\x19\x0c\x18\x0c\r\x18\x0c\x18\r\x18\x0c\x18\x18\r\x0c\x18\x0c\x18\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\x0c\x19\x18\x0c\x0c\x18\x19\x0c\x0c\x18\x18\x0c\r\x18\x18\x0c\r\x18\x18\x0c\x0c\x19\x18\x00\x01+\xa34\r\x18\x0c\x18\r\x18\x0c\x18\x0c\x18\r\x18\x0c\x18\x18\r\x18\x0c\x0c\x19\x0c\x18\x18\x0c\r\x18\x0c\x18\x18\r\x18\x0c\x0c\x18\r\x18\x0c\x18\r\x18\x18\x0c\r\x17\r\x18\x0c\x19\x0b\x19\x0c\x18\x0c\x18\r\x18\x0c\x18\x18\r\x0c\x18\x18\x0c\r\x18\x18\x0c\r\x17\x18\r\x0c\x19\x17\r\x0c\x18\x18\x00\x05\xdc\x00\x00\x00\x00'
-         ]
-    }
 
 """ Define My MultiPass! Controller Node Class"""
 class Controller(polyinterface.Controller):
@@ -81,7 +75,8 @@ class Controller(polyinterface.Controller):
                   this joins the underlying queue query thread and just waits for it to terminate
                   which never happens.
     """
-    
+    mybroadlink = None
+
     def __init__(self, polyglot):
         """
         Optional.
@@ -107,14 +102,14 @@ class Controller(polyinterface.Controller):
         
         # Show values on startup if desired.
         self.setDriver('ST', 1)
-        LOGGER.debug('MultiPass.ST=%s', self.getDriver('ST'))
+        LOGGER.debug('MultiPass. ST=%s', self.getDriver('ST'))
         #self.heartbeat(0)
         #self.check_params()
         #self.set_debug_level(self.getDriver('GV1'))
         #self.poly.add_custom_config_docs("<b>This is some custom config docs data</b>")
-        self.connect()
-        LOGGER.info('Broadlink Start complete')
-
+        self.connectbl()
+        LOGGER.info('MultiPass Start complete')
+    '''
     def shortPoll(self):
         """
         Optional.
@@ -123,12 +118,11 @@ class Controller(polyinterface.Controller):
         The timer can be overriden in the server.json.
         """
         LOGGER.debug('shortPoll')
-        '''
         for node in self.nodes:
             if node != self.address:
                 self.nodes[node].shortPoll()
-        '''
-
+    '''
+    '''
     def longPoll(self):
         """
         Optional.
@@ -137,16 +131,25 @@ class Controller(polyinterface.Controller):
         The timer can be overriden in the server.json.
         """
         LOGGER.debug('longPoll')
-
-    def connect(self, command=None):
+    '''
+    def connectbl(self, command=None):
+        
+        # First Try to Auth and see if connection is already established.
+        if self.mybroadlink != None:
+            result = self.mybroadlink.auth()
+            if result: 
+                self.setDriver('GV0', 1)
+                LOGGER.info('Previous Connection Authenticated to Broadlink @ 192.168.2.16.')
+                return
+            else:
+                self.setDriver('GV0', 0)
         
         # There will be many objects used in the MultiPass! Node Server this is the first. 
         # Attempt to connect to the known Broadlink RM Pro+
-        self.broadlink = self.connect_broadlink()
+        self.mybroadlink = self.connect_broadlink()
 
-        # self.addNode(TemplateNode(self, self.address, 'templateaddr', 'Template Node Name'))
-
-        # Now to define the Nodes and their unique RF Packet Codes.
+        # Once connected create the nodes defined in RFCodes.py.
+        if self.mybroadlink != None: self.populate_broadlink()      
 
     def connect_broadlink(self):
         """
@@ -160,122 +163,48 @@ class Controller(polyinterface.Controller):
 
         try:
             result = d.auth()
+            self.setDriver('GV0', 1)
             LOGGER.info('Successful Connection and Authentication to Broadlink @ 192.168.2.16.') 
-        except (KeyError, ValueError):
+        except:
+            self.setDriver('GV0', 0)
             LOGGER.info('Unable to connect to Broadlink @ 192.168.2.16.') 
         return d if result else None
+    
+    def populate_broadlink(self):
+        """
+        Once connected and authenticated to broadlink verify nodes match dictionary.
+        """
+        for node in RFCodes.keys():
+            # Create Mac address from Device Name
+            address = node.encode('utf-8').hex()
+            if len(address) < 12: 
+                address = address.zfill(12) # Pad to 12 Hex Characters
+            else:
+                address = address[:12] # Trim to 12 Hex Characters
+            if not address in self.nodes:
+                self.addNode(omniamotor(self, self.address, address, node, self.mybroadlink),update=True)        
+                self.setDriver('GV1', int(self.getDriver('GV1')) + 1 )
 
     def stop(self):
-        self.setDriver('ST', 0)
-        LOGGER.debug('NodeServer stopped. ST=%s', self.getDriver('ST'))
+        try:
+            del self.broadlink
+        except:
+            pass
+        self.setDriver('GV0', 0)
+        LOGGER.debug('Broadlink Link stopped. GV0=%s', self.getDriver('GV0'))
+        self.setDriver('ST', 0)        
+        LOGGER.debug('MultiPass NodeServer stopped. ST=%s', self.getDriver('ST'))
 
-    '''
-    def process_config(self, config):
-        # this seems to get called twice for every change, why?
-        # What does config represent?
-        LOGGER.info("process_config: Enter config={}".format(config))
-        LOGGER.info("process_config: Exit")
-
-    def set_module_logs(self, level):
-        logging.getLogger('urllib3').setLevel(level)
-
-    def set_debug_level(self,level):
-        LOGGER.debug('set_debug_level: {}'.format(level))
-        if level is None:
-            level = 30
-        level = int(level)
-        if level == 0:
-            level = 30
-        LOGGER.info('set_debug_level: Set GV1 to {}'.format(level))
-        self.setDriver('GV1', level)
-        # 0=All 10=Debug are the same because 0 (NOTSET) doesn't show everything.
-        if level <= 10:
-            LOGGER.setLevel(logging.DEBUG)
-        elif level == 20:
-            LOGGER.setLevel(logging.INFO)
-        elif level == 30:
-            LOGGER.setLevel(logging.WARNING)
-        elif level == 40:
-            LOGGER.setLevel(logging.ERROR)
-        elif level == 50:
-            LOGGER.setLevel(logging.CRITICAL)
-        else:
-            LOGGER.debug("set_debug_level: Unknown level {}".format(level))
-        # this is the best way to control logging for modules, so you can
-        # still see warnings and errors
-        #if level < 10:
-        #    self.set_module_logs(logging.DEBUG)
-        #else:
-        #    # Just warnigns for the modules unless in module debug mode
-        #    self.set_module_logs(logging.WARNING)
-        # Or you can do this and you will never see mention of module logging
-        
-        if level < 10:
-            LOG_HANDLER.set_basic_config(True,logging.DEBUG)
-        else:
-            # This is the polyinterface default
-            LOG_HANDLER.set_basic_config(True,logging.WARNING)
-    
-
-    def check_params(self):
-        return
-        """
-        This is an example if using custom Params for user and password and an example with a Dictionary
-        """
-        self.removeNoticesAll()
-        self.addNotice('Hey there, my IP is {}'.format(self.poly.network_interface['addr']),'hello')
-        self.addNotice('Hello Friends! (without key)')
-        default_user = "YourUserName"
-        default_password = "YourPassword"
-        if 'user' in self.polyConfig['customParams']:
-            self.user = self.polyConfig['customParams']['user']
-        else:
-            self.user = default_user
-            LOGGER.error('check_params: user not defined in customParams, please add it.  Using {}'.format(self.user))
-            st = False
-
-        if 'password' in self.polyConfig['customParams']:
-            self.password = self.polyConfig['customParams']['password']
-        else:
-            self.password = default_password
-            LOGGER.error('check_params: password not defined in customParams, please add it.  Using {}'.format(self.password))
-            st = False
-        # Make sure they are in the params
-        self.addCustomParam({'password': self.password, 'user': self.user, 'some_example': '{ "type": "TheType", "host": "host_or_IP", "port": "port_number" }'})
-
-        # Add a notice if they need to change the user/password from the default.
-        if self.user == default_user or self.password == default_password:
-            # This doesn't pass a key to test the old way.
-            self.addNotice('Please set proper user and password in configuration page, and restart this nodeserver')
-        # This one passes a key to test the new way.
-        self.addNotice('This is a test','test')
-    
-    def cmd_set_debug_mode(self,command):
-        val = int(command.get('value'))
-        LOGGER.debug("cmd_set_debug_mode: {}".format(val))
-        self.set_debug_level(val)
-    '''
-    """
-    Optional.
-    Since the controller is the parent node in ISY, it will actual show up as a node.
-    So it needs to know the drivers and what id it will use. The drivers are
-    the defaults in the parent Class, so you don't need them unless you want to add to
-    them. The ST and GV1 variables are for reporting status through Polyglot to ISY,
-    DO NOT remove them. UOM 2 is boolean.
-    The id must match the nodeDef id="controller"
-    In the nodedefs.xml
-    """
     id = 'controller'
 
-    commands = { 'CONNECT': connect }
+    commands = { 'CONNECTBL': connectbl }
 
     drivers = [
         {'driver': 'ST', 'value': 1, 'uom': 2},
-        {'driver': 'GV0', 'value': 0, 'uom': 56} ] 
+        {'driver': 'GV0', 'value': 0, 'uom': 2},
+        {'driver': 'GV1', 'value': 0, 'uom': 56} ] 
 
-
-
-class Omnia(polyinterface.Node):
+class omniamotor(polyinterface.Node):
     """
     This is the class that all the Nodes will be represented by. You will add this to
     Polyglot/ISY with the controller.addNode method.
@@ -294,7 +223,7 @@ class Omnia(polyinterface.Node):
     reportDrivers(): Forces a full update of all drivers to Polyglot/ISY.
     query(): Called when ISY sends a query request to Polyglot for this specific node
     """
-    def __init__(self, controller, primary, address, name):
+    def __init__(self, controller, primary, address, name, dev):
         """
         Optional.
         Super runs all the parent class necessities. You do NOT have
@@ -304,20 +233,25 @@ class Omnia(polyinterface.Node):
         :param primary: Controller address
         :param address: This nodes address
         :param name: This nodes name
+        :param rfc: The Up / Down / Stop byte codes for RF Packets.
         """
         super().__init__(controller, primary, address, name)
         self.ctrl = controller
         self.pri = primary
         self.name = name
-        LOGGER.info('Broadlink Node Created {}.'.format(self.name))
+        self.dev = dev
+        LOGGER.info('OmniaBlind Node Created {}.'.format(self.name))
+        self.setDriver('ST', 1)
 
     def shortPoll(self):
         LOGGER.debug('shortPoll')
+        """
         if int(self.getDriver('ST')) == 1:
             self.setDriver('ST',0)
         else:
             self.setDriver('ST',1)
-        LOGGER.debug('%s: get ST=%s',self.lpfx,self.getDriver('ST'))
+        """
+        LOGGER.debug('Omnia %s: ST=%s',self.name,self.getDriver('ST'))
 
     def longPoll(self):
         LOGGER.debug('longPoll')
@@ -340,16 +274,24 @@ class Omnia(polyinterface.Node):
         LOGGER.debug('%s: get ST=%s', self.lpfx, self.getDriver('ST'))
         self.http = urllib3.PoolManager()
         '''
+        self.setDriver('ST', 1)
 
     def cmd_up(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-UP",command))
+        #LOGGER.info('RFCode Lookup for {}:{}.'.format(self.name,RFCodes[self.name][1]))
+        self.dev.send_data(RFCodes[self.name][1])
 
     def cmd_down(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-DOWN",command))
+        #LOGGER.info('RFCode Lookup for {}:{}.'.format(self.name,RFCodes[self.name][-1]))
+        self.dev.send_data(RFCodes[self.name][-1])
 
     def cmd_stop(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-STOP", command))
+        #LOGGER.info('RFCode Lookup for {}:{}.'.format(self.name,RFCodes[self.name][0]))
+        self.dev.send_data(RFCodes[self.name][0])
 
+    '''
     def query(self,command=None):
         """
         Called by ISY to report all drivers for this node. This is done in
@@ -357,6 +299,7 @@ class Omnia(polyinterface.Node):
         there is a need.
         """
         self.reportDrivers()
+    '''
 
     #Hints See: https://github.com/UniversalDevicesInc/hints
     #hint = [1,2,3,4]
@@ -374,9 +317,9 @@ class Omnia(polyinterface.Node):
     the ISY what fields and commands this node has.
     """
     commands = {
-                    'UP': cmd_up,
-                    'DOWN': cmd_down,
-                    'STOP': cmd_stop
+                    'BUP': cmd_up,
+                    'BDOWN': cmd_down,
+                    'BSTOP': cmd_stop
                 }
     """
     This is a dictionary of commands. If ISY sends a command to the NodeServer,

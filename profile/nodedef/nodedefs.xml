@@ -6,32 +6,27 @@
         <sts>
 			<st id="ST" editor="bool" />
 			<st id="GV0" editor="bool" />
-            <st id="GV1" editor="I_DEBUG" />
+            <st id="GV1" editor="omniacount" />
 		</sts>
         <cmds>
-            <sends>
-              <!-- These are for our heartbeat -->
-              <cmd id="DON" />
-              <cmd id="DOF" />
-            </sends>
+            <sends />
             <accepts>
-              <cmd id="SET_DM">
-                <p id="" editor="I_DEBUG" init="GV1" />
-              </cmd>
-              <cmd id="CONNECT" />
+              <cmd id="CONNECTBL" />
             </accepts>
         </cmds>
     </nodeDef>
 	<!-- BroadlinkRM Node (Device) -->
     <nodeDef id="omniamotor" nls="omnia">
         <editors />
-        <sts />
+        <sts> 
+        	<st id="ST" editor="bool" />
+        </sts>
         <cmds>
             <sends />
             <accepts>
-                <cmd id="UP" />
-                <cmd id="DOWN" />
-                <cmd id="STOP" />
+                <cmd id="BUP" />
+                <cmd id="BDOWN" />
+                <cmd id="BSTOP" />
             </accepts>
         </cmds>
     </nodeDef>
