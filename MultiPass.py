@@ -139,7 +139,7 @@ class Controller(polyinterface.Controller):
             result = self.mybroadlink.auth()
             if result: 
                 self.setDriver('GV0', 1)
-                LOGGER.info('Previous Connection Authenticated to Broadlink @ 192.168.2.16.')
+                LOGGER.info('Previous Connection Authenticated to Broadlink @ 172.16.50.28.')
                 return
             else:
                 self.setDriver('GV0', 0)
@@ -159,15 +159,15 @@ class Controller(polyinterface.Controller):
         host = 192.168.2.15 (DHCP reservation), port 80
         mac = 78:0f:77:63:5a:25 Convert to bytes = b'x\x0fwcZ%'
         """
-        d = broadlink.gendevice(0x27a9,('192.168.2.16', 80), b'x\x0fwcZ%', name='Apt', cloud=False)
+        d = broadlink.gendevice(0x27a9,('172.16.50.28', 80), b'x\x0fwc]\x85', name='Apt', cloud=False)
 
         try:
             result = d.auth()
             self.setDriver('GV0', 1)
-            LOGGER.info('Successful Connection and Authentication to Broadlink @ 192.168.2.16.') 
+            LOGGER.info('Successful Connection and Authentication to Broadlink @ 172.16.50.28.') 
         except:
             self.setDriver('GV0', 0)
-            LOGGER.info('Unable to connect to Broadlink @ 192.168.2.16.') 
+            LOGGER.info('Unable to connect to Broadlink @ 172.16.50.28.') 
         return d if result else None
     
     def populate_broadlink(self):
@@ -279,12 +279,12 @@ class omniamotor(polyinterface.Node):
     def cmd_up(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-UP",command))
         #LOGGER.info('RFCode Lookup for {}:{}.'.format(self.name,RFCodes[self.name][1]))
-        self.dev.send_data(RFCodes[self.name][1])
+        self.dev.send_data(RFCodes[self.name][0])
 
     def cmd_down(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-DOWN",command))
         #LOGGER.info('RFCode Lookup for {}:{}.'.format(self.name,RFCodes[self.name][-1]))
-        self.dev.send_data(RFCodes[self.name][-1])
+        self.dev.send_data(RFCodes[self.name][1])
 
     def cmd_stop(self,command):
         LOGGER.info('Broadlink RM device {}:{}.'.format("TEST-STOP", command))
