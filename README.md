@@ -1,7 +1,7 @@
 # udi-broadlink-poly
 
 This Poly provides an interface between Broadlink and Polyglot v2 server. This a Fork from https://github.com/ch491/udi-broadlink-poly
-This nodeserver is not intented has his it would need to be modified to your need.       
+This nodeserver is not intented to be used without customization from your part. 
 
 Installation
 You can install manually :
