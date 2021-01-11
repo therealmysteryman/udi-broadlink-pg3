@@ -1,7 +1,7 @@
 """
 File: RFCodes.py
-Author: Chad Hoevenaars
-Updated: June 15, 2020
+Author: AutomationGeek
+Updated: January 10, 2022
 Desc: This file contains the dictionary for all RFCodes used with the Broadlink RM Pro+
 Format: Key = Node_Name (this will be used as the MAC address when converted to Hex.
         Value = A List of 3 binary codes (0 = Stop, 1 = Up, -1 or 3 is Down)
