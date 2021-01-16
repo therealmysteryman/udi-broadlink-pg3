@@ -3,6 +3,8 @@
 This Poly provides an interface between Broadlink and Polyglot v2 server. This a Fork from https://github.com/ch491/udi-broadlink-poly
 This nodeserver is not intented to be used without customization from your part. 
 
+I use it to control one roller blind using RF code
+
 Installation
 You can install manually :
 
