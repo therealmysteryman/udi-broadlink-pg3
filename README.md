@@ -19,7 +19,4 @@ You can install manually :
         mac = 78:0f:77:63:5a:25 Convert to bytes = b'x\x0fwcZ%'
         """
         d = broadlink.gendevice(0x27a9,('xxx.xx.xx.xx', 80), b'x\x0fwcZ%', name='Apt', cloud=False)
-        
 5. Modify the RFCodes.py to include your Binary code to be send by Broadlink
-
-
