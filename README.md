@@ -5,6 +5,8 @@ This nodeserver is not intented to be used without customization from your part.
 
 I use it to control one roller blind using RF code
 
+** Not supported and currently not in the store **
+
 Installation
 You can install manually :
 
