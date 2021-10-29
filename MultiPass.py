@@ -115,7 +115,7 @@ class Controller(udi_interface.Node):
         host = 192.168.2.15 (DHCP reservation), port 80
         mac = 78:0f:77:63:5a:25 Convert to bytes = b'x\x0fwcZ%'
         """
-        d = broadlink.gendevice(0x27a9,('172.16.50.28', 80), b'x\x0fwc]\x85', name='Apt', cloud=False)
+        d = broadlink.gendevice(0x27a9,('172.16.50.28', 80), b'x\x0fwc]\x85', name='Apt')
 
         try:
             result = d.auth()
