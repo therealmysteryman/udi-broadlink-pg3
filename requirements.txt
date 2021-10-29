@@ -1,2 +1,3 @@
 udi_interface>=3.0.18
 broadlink >= 0.14.0
+python-switchbot
