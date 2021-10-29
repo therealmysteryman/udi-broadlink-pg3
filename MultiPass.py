@@ -10,10 +10,7 @@ Also using the broadlink module from: https://github.com/mjg59/python-broadlink
         Copyright (c) 2014 Mike Ryan
         Copyright (c) 2016 Matthew Garrett 
 """
-try:
-    import polyinterface
-except ImportError:
-    import pgc_interface as polyinterface
+import udi_interface
 import broadlink
 
 import sys
@@ -28,26 +25,14 @@ polyinterface has a LOGGER that is created by default and logs to:
 logs/debug.log
 You can use LOGGER.info, LOGGER.warning, LOGGER.debug, LOGGER.error levels as needed.
 """
-LOGGER = polyinterface.LOGGER
+LOGGER = udi_interface.LOGGER
+SERVERDATA = json.load(open('server.json'))
+VERSION = SERVERDATA['credits'][0]['version']
 # IF you want a different log format than the current default
 #polyinterface.LOG_HANDLER.set_log_format('%(asctime)s %(threadName)-10s %(name)-18s %(levelname)-8s %(module)s:%(funcName)s: %(message)s')
 
-
-"""
-Open the server.json file and collect the data within it. 
-"""
-with open('server.json') as data:
-    SERVERDATA = json.load(data)
-    data.close()
-try:
-    VERSION = SERVERDATA['credits'][0]['version']
-    LOGGER.info('Broadlink Poly Version {} found.'.format(VERSION))
-except (KeyError, ValueError):
-    LOGGER.info('Broadlink Poly Version not found in server.json.')
-    VERSION = '0.0.0'
-
 """ Define My MultiPass! Controller Node Class"""
-class Controller(polyinterface.Controller):
+class Controller(udi_interface.Node):
     """
     The Controller Class is the primary node from an ISY perspective. It is a Superclass
     of polyinterface.Node so all methods from polyinterface.Node are available to this
@@ -77,61 +62,31 @@ class Controller(polyinterface.Controller):
     """
     mybroadlink = None
 
-    def __init__(self, polyglot):
-        """
-        Optional.
-        Super runs all the parent class necessities. You do NOT have
-        to override the __init__ method, but if you do, you MUST call super.
-        """
-        super().__init__(polyglot)
+    def __init__(self, polyglot, primary, address, name):
+        super(Controller, self).__init__(polyglot, primary, address, name)
+        self.poly = polyglot
         self.name = 'MultiPass Controller'
-        # This can be used to call your function everytime the config changes
-        # But currently it is called many times, so not using.
-        # self.poly.onConfig(self.process_config)
-
-    def start(self):
-        """
-        Optional.
-        Polyglot v2 Interface startup done. Here is where you start your integration.
-        This will run, once the NodeServer connects to Polyglot and gets it's config.
-        In this example I am calling a connect method. While this is optional,
-        this is where you should start. No need to Super this method, the parent
-        version does nothing.
-        """
-        LOGGER.info('Starting MultiPass NodeServer version {}'.format(VERSION))
         
-        # Show values on startup if desired.
+        polyglot.subscribe(polyglot.START, self.start, address)
+        polyglot.subscribe(polyglot.CUSTOMPARAMS, self.parameterHandler)
+        polyglot.subscribe(polyglot.POLL, self.poll)
+
+        polyglot.ready()
+        polyglot.addNode(self)
+    
+    def parameterHandler(self, params):
+        self.poly.Notices.clear()
+    
+    def start(self):
+        LOGGER.info('Starting MultiPass NodeServer version {}'.format(VERSION))
         self.setDriver('ST', 1)
         LOGGER.debug('MultiPass. ST=%s', self.getDriver('ST'))
-        #self.heartbeat(0)
-        #self.check_params()
-        #self.set_debug_level(self.getDriver('GV1'))
-        #self.poly.add_custom_config_docs("<b>This is some custom config docs data</b>")
         self.connectbl()
         LOGGER.info('MultiPass Start complete')
-    '''
-    def shortPoll(self):
-        """
-        Optional.
-        This runs every 10 seconds. You would probably update your nodes either here
-        or longPoll. No need to Super this method the parent version does nothing.
-        The timer can be overriden in the server.json.
-        """
-        LOGGER.debug('shortPoll')
-        for node in self.nodes:
-            if node != self.address:
-                self.nodes[node].shortPoll()
-    '''
-    '''
-    def longPoll(self):
-        """
-        Optional.
-        This runs every 30 seconds. You would probably update your nodes either here
-        or shortPoll. No need to Super this method the parent version does nothing.
-        The timer can be overriden in the server.json.
-        """
-        LOGGER.debug('longPoll')
-    '''
+
+    def poll(self, polltype):
+        pass
+        
     def connectbl(self, command=None):
         
         # First Try to Auth and see if connection is already established.
@@ -204,7 +159,7 @@ class Controller(polyinterface.Controller):
         {'driver': 'GV0', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 56} ] 
 
-class omniamotor(polyinterface.Node):
+class omniamotor(SenseDetectedDevice.Node):
     """
     This is the class that all the Nodes will be represented by. You will add this to
     Polyglot/ISY with the controller.addNode method.
@@ -329,32 +284,12 @@ class omniamotor(polyinterface.Node):
 
 if __name__ == "__main__":
     try:
-        polyglot = polyinterface.Interface('PythonTemplate')
-        """
-        Instantiates the Interface to Polyglot.
-        The name doesn't really matter unless you are starting it from the
-        command line then you need a line Template=N
-        where N is the slot number.
-        """
+        polyglot = udi_interface.Interface([])
         polyglot.start()
-        """
-        Starts MQTT and connects to Polyglot.
-        """
-        control = Controller(polyglot)
-        """
-        Creates the Controller Node and passes in the Interface
-        """
-        control.runForever()
-        """
-        Sits around and does nothing forever, keeping your program running.
-        """
+        polyglot.updateProfile()
+        polyglot.setCustomParamsDoc()
+        Controller(polyglot, 'controller', 'controller', 'PythonTemplate')
+        polyglot.runForever()
     except (KeyboardInterrupt, SystemExit):
-        LOGGER.warning("Received interrupt or exit...")
-        """
-        Catch SIGTERM or Control-C and exit cleanly.
-        """
-        polyglot.stop()
-    except Exception as err:
-        LOGGER.error('Excption: {0}'.format(err), exc_info=True)
-    sys.exit(0)
+        sys.exit(0)
 
