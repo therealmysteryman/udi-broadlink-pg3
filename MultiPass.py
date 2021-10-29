@@ -197,7 +197,8 @@ class omniamotor(udi_interface.Node):
         self.name = name
         self.dev = dev
         LOGGER.info('OmniaBlind Node Created {}.'.format(self.name))
-        self.setDriver('ST', 1)
+        
+        controller.subscribe(controller.START, self.start, address)
 
     def shortPoll(self):
         LOGGER.debug('shortPoll')
