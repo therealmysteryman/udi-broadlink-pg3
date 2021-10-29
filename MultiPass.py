@@ -80,13 +80,13 @@ class Controller(udi_interface.Node):
     def start(self):
         LOGGER.info('Starting MultiPass NodeServer version {}'.format(VERSION))
         self.setDriver('ST', 1)
-        LOGGER.debug('MultiPass. ST=%s', self.getDriver('ST'))
-        self.connectbl()
-        LOGGER.info('MultiPass Start complete')
 
     def poll(self, polltype):
         pass
-        
+    
+    def discover(self, *args, **kwargs):
+        self.connectbl()
+
     def connectbl(self, command=None):
         
         # First Try to Auth and see if connection is already established.
