@@ -76,6 +76,7 @@ class Controller(udi_interface.Node):
     
     def parameterHandler(self, params):
         self.poly.Notices.clear()
+        self.discover()
     
     def start(self):
         LOGGER.info('Starting MultiPass NodeServer version {}'.format(VERSION))
