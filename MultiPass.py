@@ -159,7 +159,7 @@ class Controller(udi_interface.Node):
         {'driver': 'GV0', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 56} ] 
 
-class omniamotor(SenseDetectedDevice.Node):
+class omniamotor(udi_interface.Node):
     """
     This is the class that all the Nodes will be represented by. You will add this to
     Polyglot/ISY with the controller.addNode method.
