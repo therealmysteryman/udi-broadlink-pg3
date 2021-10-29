@@ -138,7 +138,7 @@ class Controller(udi_interface.Node):
             else:
                 address = address[:12] # Trim to 12 Hex Characters
             if not self.poly.getNode(address):
-                self.poly.addNode(omniamotor(self, self.address, address, node, self.mybroadlink),update=True)        
+                self.poly.addNode(omniamotor(self, self.address, address, node, self.mybroadlink))        
                 self.setDriver('GV1', int(self.getDriver('GV1')) + 1 )
 
     def stop(self):
@@ -191,7 +191,7 @@ class omniamotor(udi_interface.Node):
         :param name: This nodes name
         :param rfc: The Up / Down / Stop byte codes for RF Packets.
         """
-        super().__init__(controller, primary, address, name)
+        super(omniamotor, self).__init__(controller, primary, address, name)
         self.ctrl = controller
         self.pri = primary
         self.name = name
