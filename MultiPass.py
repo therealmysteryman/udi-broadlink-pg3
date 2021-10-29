@@ -138,7 +138,7 @@ class Controller(udi_interface.Node):
             else:
                 address = address[:12] # Trim to 12 Hex Characters
             if not self.poly.getNode(address):
-                self.poly.addNode(omniamotor(self, self.address, address, node, self.mybroadlink))        
+                self.poly.addNode(omniamotor(self.poly, self.address, address, node, self.mybroadlink))        
                 self.setDriver('GV1', int(self.getDriver('GV1')) + 1 )
 
     def stop(self):
