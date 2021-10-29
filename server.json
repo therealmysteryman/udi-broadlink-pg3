@@ -17,5 +17,14 @@
             "source": "https://github.com/ch491/MultiPass-PolyV2",
             "license": "https://github.com/ch491/MultiPass-PolyV2/blob/master/LICENSE"
         }
-    ]
+    ],
+	"store": {
+		"developer": "jf.tremblay@gmail.com",
+		"purchaseOptions": [
+			{
+				"isPerpetual": true,
+				"price": 0
+			}
+		]
+	}
 }
