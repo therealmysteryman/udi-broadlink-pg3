@@ -11,9 +11,9 @@
     "credits": [
         {
             "title": "MultiPass: a NodeServer for UDI's ISY994i",
-            "author": "Chad Hoevenaars (ch491)",
-            "version": "0.0.2",
-            "date": "July 15, 2020",
+            "author": "Chad Hoevenaars (ch491) / AutomationGeek",
+            "version": "3.0.0",
+            "date": "November 01, 2021",
             "source": "https://github.com/ch491/MultiPass-PolyV2",
             "license": "https://github.com/ch491/MultiPass-PolyV2/blob/master/LICENSE"
         }
