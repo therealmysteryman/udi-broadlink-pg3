@@ -13,3 +13,9 @@ ND-omniamotor-ICON = Input
 CMD-BUP-NAME = Blind Up
 CMD-BDOWN-NAME = Blind Down
 CMD-BSTOP-NAME = Stop Blind
+
+# Switchbot Curtain
+ND-sbCurtain-NAME = Curtain Node
+ND-sbCurtain-ICON = Input
+CMD-BOPEN-NAME = Open
+CMD-BCLOSE-NAME = Close
