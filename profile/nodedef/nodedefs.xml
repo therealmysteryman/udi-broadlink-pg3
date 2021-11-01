@@ -30,4 +30,18 @@
             </accepts>
         </cmds>
     </nodeDef>
+    <!-- SwitchBot Curtain Node (Device) -->
+    <nodeDef id="sbCurtain" nls="omnia">
+        <editors />
+        <sts> 
+	<st id="ST" editor="bool" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="BOPEN" />
+                <cmd id="BCLOSE" />
+            </accepts>
+        </cmds>
+    </nodeDef>
 </nodeDefs>
