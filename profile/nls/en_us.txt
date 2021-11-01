@@ -15,7 +15,7 @@ CMD-BDOWN-NAME = Blind Down
 CMD-BSTOP-NAME = Stop Blind
 
 # Switchbot Curtain
-ND-sbCurtain-NAME = Curtain Node
-ND-sbCurtain-ICON = Input
+ND-sbc-NAME = Curtain Node
+ND-sbc-ICON = Input
 CMD-BOPEN-NAME = Open
 CMD-BCLOSE-NAME = Close
