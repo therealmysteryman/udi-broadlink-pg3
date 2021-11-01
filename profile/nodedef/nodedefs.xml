@@ -31,7 +31,7 @@
         </cmds>
     </nodeDef>
     <!-- SwitchBot Curtain Node (Device) -->
-    <nodeDef id="sbCurtain" nls="omnia">
+    <nodeDef id="sbCurtain" nls="sbc">
         <editors />
         <sts> 
 	<st id="ST" editor="bool" />
