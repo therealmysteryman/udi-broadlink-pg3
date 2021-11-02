@@ -61,7 +61,7 @@ class Controller(udi_interface.Node):
         self.connectbl()
         # switchbot curtain
         switchbot = SwitchBot(token=self.token)
-        sbCurtainId = [ '5F0B798AEF91','5F0B798AEF91','5F0B798AEF91' ]
+        sbCurtainId = [ 'F9471211A06F','ECB814DDEBB5','FC574D4EF6B8' ]
         
         for node in sbCurtainId :
             if not self.poly.getNode(node):
