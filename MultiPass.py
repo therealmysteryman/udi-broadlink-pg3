@@ -172,6 +172,8 @@ class omniamotor(udi_interface.Node):
 
     #Hints See: https://github.com/UniversalDevicesInc/hints
     #hint = [1,2,3,4]
+    id = 'omniamotor'
+
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 2}]
  
     commands = {
@@ -201,6 +203,8 @@ class sbCurtain(udi_interface.Node):
         
     #Hints See: https://github.com/UniversalDevicesInc/hints
     #hint = [1,2,3,4]
+    id = 'sbCurtain'
+        
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 2}]
  
     commands = {
