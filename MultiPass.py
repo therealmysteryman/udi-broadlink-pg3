@@ -65,7 +65,7 @@ class Controller(udi_interface.Node):
         
         for node in sbCurtainId :
             if not self.poly.getNode(node):
-                self.poly.addNode(sbCurtain(self.poly, self.address, "drape1", node, switchbot.device(id=node)))        
+                self.poly.addNode(sbCurtain(self.poly, self.address, node, node+"_", switchbot.device(id=node)))        
 
     def connectbl(self, command=None):
         
@@ -195,10 +195,10 @@ class sbCurtain(udi_interface.Node):
         self.setDriver('ST', 1)
 
     def cmd_open(self,command):
-        self.dev.command('open')
+        self.dev.command('turnOn')
 
     def cmd_close(self,command):
-        self.dev.command('close')
+        self.dev.command('turnOff')
 
         
     #Hints See: https://github.com/UniversalDevicesInc/hints
