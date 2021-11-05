@@ -8,14 +8,14 @@ ST-ctl-GV0-NAME = Broadlink Authenticated
 ST-ctl-GV1-NAME = Omnia Motors Defined
 
 # Omnia Motors
-ND-omniamotor-NAME = OmniaMotor Node
-ND-omniamotor-ICON = Input
+ND-omnia-NAME = OmniaMotor Node
+ND-omnia-ICON = Input
 CMD-BUP-NAME = Blind Up
 CMD-BDOWN-NAME = Blind Down
 CMD-BSTOP-NAME = Stop Blind
 
 # Switchbot Curtain
-ND-sbCurtain-NAME = Curtain Node
-ND-sbCurtain-ICON = Input
+ND-sbc-NAME = Curtain Node
+ND-sbc-ICON = Input
 CMD-BOPEN-NAME = Open
 CMD-BCLOSE-NAME = Close
