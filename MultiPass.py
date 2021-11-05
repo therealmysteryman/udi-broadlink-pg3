@@ -65,8 +65,9 @@ class Controller(udi_interface.Node):
         
         intCount = 1
         for node in sbCurtainId :
-            if not self.poly.getNode(node):
-                self.poly.addNode(sbCurtain(self.poly, self.address, "curtain_" + str(intCount) , "Curtain_" + str(intCount), switchbot.device(id=node)))        
+            #if not self.poly.getNode(node):
+            self.poly.addNode(sbCurtain(self.poly, self.address, "curtain_" + str(intCount) , "Curtain_" + str(intCount), switchbot.device(id=node)))        
+            intCount = intCount + 1
 
     def connectbl(self, command=None):
         
